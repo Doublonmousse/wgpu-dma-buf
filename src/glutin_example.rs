@@ -28,7 +28,7 @@ pub fn main(event_loop: winit::event_loop::EventLoop<()>) -> Result<(), Box<dyn 
     //
     // XXX if you don't care about running on Android or so you can safely remove
     // this condition and always pass the window builder.
-    let window_builder = cfg!(wgl_backend).then(|| {
+    let window_builder: Option<WindowBuilder> = cfg!(wgl_backend).then(|| {
         WindowBuilder::new()
             .with_transparent(true)
             .with_title("Glutin triangle gradient example (press Escape to exit)")

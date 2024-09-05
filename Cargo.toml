@@ -7,7 +7,7 @@ edition = "2021"
 
 [dependencies]
 bytemuck = { version = "1.14.1", features = [ "derive" ] }
-wgpu = { version = "^0.19.1" }
+wgpu = { version = "^0.19.1", features=["angle"] }
 wgpu-hal = { version = "^0.19.1" }
 log = "0.4.20"
 env_logger = "0.11.1"
@@ -27,6 +27,7 @@ raw-window-handle = "0.5.2"
 winit = "0.29.10"
 cgmath = "0.18"
 slint = "1.4.1"
+gtk4 = { version = "0.9.0", features = ["v4_14"]}
 
 [build-dependencies]
 gl_generator = "0.14"

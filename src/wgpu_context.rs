@@ -1,5 +1,6 @@
 use std::time::Duration;
 use wgpu::util::DeviceExt;
+use wgpu::Limits;
 use crate::wgpu_data;
 use crate::wgpu_data::ViewProj;
 
@@ -25,8 +26,11 @@ impl WgpuContext {
             .request_adapter(&wgpu::RequestAdapterOptions::default())
             .await
             .unwrap();
+        let description = wgpu::DeviceDescriptor::default();
+        // description.required_limits = Limits::downlevel_webgl2_defaults();
+        // description.required_limits.max_compute_workgroups_per_dimension = 0; 
         let (device, queue) = adapter
-            .request_device(&Default::default(), None)
+            .request_device(&description, None)
             .await
             .unwrap();
 
@@ -50,6 +54,7 @@ impl WgpuContext {
             view_formats: &[wgpu::TextureFormat::Rgba8Unorm],
         });
 
+        // fails here
         let vertex_buffer = device.create_buffer_init(&wgpu::util::BufferInitDescriptor {
             label: Some("vertex_buffer"),
             contents: bytemuck::cast_slice(wgpu_data::VERTICES),
